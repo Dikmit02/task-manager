@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const  bcrypt=require('bcrypt')
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -44,7 +45,7 @@ userSchema.pre('save',async function(next){
     const user=this
 
     if(user.isModified('password')){
-        user.password=await bycypt.hash(user.password,8)
+        user.password=await bcrypt.hash(user.password,8)
 
     }
     next()
